@@ -9,12 +9,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  *
  * @author jgamb
  */
 public class GUI extends javax.swing.JFrame {
+    
+    private NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
     
     private final SQLConnection server;
     /**
@@ -337,7 +341,7 @@ public class GUI extends javax.swing.JFrame {
                 int monto_a_pagar = rs.getInt("monto_a_pagar");
                 int monto_total_bruto = rs.getInt("monto_total_bruto");
                 //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
-                Object[] row = {entry, current_date, monto_a_pagar, monto_total_bruto};
+                Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
               
                 model.addRow(row);
             }
@@ -421,7 +425,7 @@ public class GUI extends javax.swing.JFrame {
                 int monto_a_pagar = rs.getInt("monto_a_pagar");
                 int monto_total_bruto = rs.getInt("monto_total_bruto");
                 //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
-                Object[] row = {entry, current_date, monto_a_pagar, monto_total_bruto};
+                Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
               
                 model.addRow(row);
             }
