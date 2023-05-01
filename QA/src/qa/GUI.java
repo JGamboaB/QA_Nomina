@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -57,10 +58,15 @@ public class GUI extends javax.swing.JFrame {
         p_empty = new javax.swing.JPanel();
         p_obrero = new javax.swing.JPanel();
         p_patron = new javax.swing.JPanel();
+        p_p_title = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_deducciones_al_patrono = new javax.swing.JTable();
+        b_pp_calcular = new javax.swing.JButton();
         p_renta = new javax.swing.JPanel();
         p_salario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 500));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 500));
         getContentPane().setLayout(null);
@@ -227,18 +233,47 @@ public class GUI extends javax.swing.JFrame {
 
         Parent.add(p_obrero, "card2");
 
-        p_patron.setBackground(new java.awt.Color(204, 255, 0));
+        p_patron.setBackground(new java.awt.Color(204, 204, 204));
+        p_patron.setLayout(null);
 
-        javax.swing.GroupLayout p_patronLayout = new javax.swing.GroupLayout(p_patron);
-        p_patron.setLayout(p_patronLayout);
-        p_patronLayout.setHorizontalGroup(
-            p_patronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        p_patronLayout.setVerticalGroup(
-            p_patronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        p_p_title.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        p_p_title.setForeground(new java.awt.Color(0, 0, 0));
+        p_p_title.setText("Deducciones Patronales");
+        p_patron.add(p_p_title);
+        p_p_title.setBounds(250, 30, 188, 25);
+
+        tbl_deducciones_al_patrono.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Fecha", "Monto a pagar", "Monto total bruto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbl_deducciones_al_patrono);
+
+        p_patron.add(jScrollPane1);
+        jScrollPane1.setBounds(30, 70, 634, 350);
+
+        b_pp_calcular.setText("Calcular");
+        b_pp_calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_pp_calcularActionPerformed(evt);
+            }
+        });
+        p_patron.add(b_pp_calcular);
+        b_pp_calcular.setBounds(310, 430, 75, 23);
 
         Parent.add(p_patron, "card3");
 
@@ -280,14 +315,37 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 500);
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void b_patronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_patronActionPerformed
         Parent.removeAll();
         Parent.add(p_patron);
         Parent.repaint();
         Parent.revalidate();
+        try {
+            ResultSet rs = server.ver_d_patronales();
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_al_patrono.getModel();
+            model.setRowCount(0);
+            
+            while (rs.next()) {
+                int entry = rs.getInt("codigo");
+                String current_date = rs.getString("curdate");
+                int monto_a_pagar = rs.getInt("monto_a_pagar");
+                int monto_total_bruto = rs.getInt("monto_total_bruto");
+                //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
+                Object[] row = {entry, current_date, monto_a_pagar, monto_total_bruto};
+              
+                model.addRow(row);
+            }
+            model.fireTableDataChanged();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }//GEN-LAST:event_b_patronActionPerformed
 
     private void b_obreroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_obreroActionPerformed
@@ -351,6 +409,29 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cb_showpActionPerformed
 
+    private void b_pp_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_pp_calcularActionPerformed
+        try {
+            ResultSet rs = server.calc_d_patronales();
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_al_patrono.getModel();
+            model.setRowCount(0);
+            
+            while (rs.next()) {
+                int entry = rs.getInt("codigo");
+                String current_date = rs.getString("curdate");
+                int monto_a_pagar = rs.getInt("monto_a_pagar");
+                int monto_total_bruto = rs.getInt("monto_total_bruto");
+                //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
+                Object[] row = {entry, current_date, monto_a_pagar, monto_total_bruto};
+              
+                model.addRow(row);
+            }
+            model.fireTableDataChanged();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_b_pp_calcularActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -401,20 +482,24 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton b_login;
     private javax.swing.JButton b_obrero;
     private javax.swing.JButton b_patron;
+    private javax.swing.JButton b_pp_calcular;
     private javax.swing.JButton b_renta;
     private javax.swing.JButton b_salario;
     private javax.swing.JButton b_salir;
     private javax.swing.JCheckBox cb_showp;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel l_password;
     private javax.swing.JLabel l_username;
     private javax.swing.JLabel label;
     private javax.swing.JPanel p_empty;
     private javax.swing.JPanel p_obrero;
+    private javax.swing.JLabel p_p_title;
     private javax.swing.JPanel p_patron;
     private javax.swing.JPanel p_renta;
     private javax.swing.JPanel p_salario;
     private javax.swing.JPasswordField pwfield;
+    private javax.swing.JTable tbl_deducciones_al_patrono;
     private javax.swing.JTextField tf_username;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables

@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class SQLConnection{
     private Connection conn;
-    private String sql_name = "DESKTOP-58M6DC9"; //change
-    private String db_name = "QA_test"; //change
-    private String url = "jdbc:sqlserver://" + sql_name + ":1433;Database="+db_name+";encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
+    private final String sql_name = "DESKTOP-58M6DC9"; //change
+    private final String db_name = "QA"; //"QA_test"; //change
+    private final String url = "jdbc:sqlserver://" + sql_name + ":1433;Database="+db_name+";encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
         
     public SQLConnection() throws SQLException{
         if (conn == null || conn.isClosed()){
@@ -16,16 +16,41 @@ public class SQLConnection{
         }
     }
     
+    public ResultSet ver_d_patronales() throws SQLException{
+        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults){
+            ResultSet rs = stmt.getResultSet();
+            return rs;
+        } return null;
+    }
+    
+    public ResultSet calc_d_patronales() throws SQLException{
+        CallableStatement stmt = conn.prepareCall("{call sp_calcular_deducciones_patrono}");
+        
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults){
+            ResultSet rs = stmt.getResultSet();
+            return rs;
+        } return null;
+    }
+    
     public void select() throws SQLException{
         // Select Statement Example
-        String sql = "SELECT * FROM TEST";
+        String sql = """
+                     select e.nombre, td.descripcion from tbl_empleados as e
+                         JOIN tbl_departamento td on td.codigo = e.departamento_id
+                         where e.departamento_id = 1;""";
         System.out.println(sql);
         try (Statement statement = conn.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                double salary = resultSet.getDouble("salary");
-                System.out.println(id + " Name: " + name + " Salary: " + salary);
+                String name = resultSet.getString("nombre");
+                String desc = resultSet.getString("descripcion");
+                System.out.println(" Name: " + name + " Description: " + desc);
             }
         }
     }
