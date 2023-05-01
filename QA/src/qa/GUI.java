@@ -4,6 +4,9 @@
  */
 package qa;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,11 +14,14 @@ import javax.swing.JOptionPane;
  * @author jgamb
  */
 public class GUI extends javax.swing.JFrame {
-
+    
+    private final SQLConnection server;
     /**
      * Creates new form NewJFrame
+     * @throws java.sql.SQLException
      */
-    public GUI() {
+    public GUI() throws SQLException {
+        this.server = new SQLConnection();
         setLocationRelativeTo(null);
         initComponents();
         setSize(900, 500);
@@ -289,6 +295,11 @@ public class GUI extends javax.swing.JFrame {
         Parent.add(p_obrero);
         Parent.repaint();
         Parent.revalidate();
+        try {
+            server.select();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_b_obreroActionPerformed
 
     private void b_rentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_rentaActionPerformed
@@ -373,7 +384,11 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                try {
+                    new GUI().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

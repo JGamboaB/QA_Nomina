@@ -4,6 +4,31 @@ import java.sql.*;
 //https://www.youtube.com/watch?v=GJTnJ_EBFY8
 
 public class SQLConnection{
+    private Connection conn;
+    private String sql_name = "DESKTOP-58M6DC9"; //change
+    private String db_name = "QA_test"; //change
+    private String url = "jdbc:sqlserver://" + sql_name + ":1433;Database="+db_name+";encrypt=true;trustServerCertificate=true;integratedSecurity=true;";
+        
+    public SQLConnection() throws SQLException{
+        if (conn == null || conn.isClosed()){
+            conn = DriverManager.getConnection(url);
+            System.out.println("Connection Established");
+        }
+    }
+    
+    public void select() throws SQLException{
+        // Select Statement Example
+        String sql = "SELECT * FROM TEST";
+        System.out.println(sql);
+        try (Statement statement = conn.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double salary = resultSet.getDouble("salary");
+                System.out.println(id + " Name: " + name + " Salary: " + salary);
+            }
+        }
+    }
 
     public static void main(String[] args) throws SQLException {
         String sql_name = "DESKTOP-58M6DC9"; //change
