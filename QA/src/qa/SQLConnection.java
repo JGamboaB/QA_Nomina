@@ -16,27 +16,72 @@ public class SQLConnection{
         }
     }
     
-    public ResultSet ver_d_patronales() throws SQLException{
-        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;";
+    public ResultSet select_ded_empleado(String i) throws SQLException{
+        String sql = """
+                     SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
+                     FROM [tbl_deducciones_por_empleado] deduc
+                     JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula
+                     WHERE deduc.empleado_id = """ + i;
         PreparedStatement stmt = conn.prepareStatement(sql);
-        
         boolean hasResults = stmt.execute();
         
-        if (hasResults){
-            ResultSet rs = stmt.getResultSet();
-            return rs;
-        } return null;
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
     }
     
-    public ResultSet calc_d_patronales() throws SQLException{
-        CallableStatement stmt = conn.prepareCall("{call sp_calcular_deducciones_patrono}");
-        
+    public ResultSet select_empleados() throws SQLException{
+        String sql = """
+        select emp.cedula, emp.nombre, emp.apellido1, emp.apellido2, emp.salario, emp.fecha_nacimiento, d.descripcion as departamento, emp.aporte_asociacion
+        from [tbl_empleados] emp
+        JOIN [tbl_departamento] d ON emp.departamento_id = d.codigo""";
+        PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
-        if (hasResults){
-            ResultSet rs = stmt.getResultSet();
-            return rs;
-        } return null;
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
+    }
+    
+    public ResultSet select_empleado() throws SQLException{
+        String sql = """
+        SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
+        FROM [tbl_deducciones_por_empleado] deduc
+        JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula""";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
+    }
+    
+    public ResultSet sp_empleado() throws SQLException{
+        CallableStatement stmt = conn.prepareCall("{call sp_calcular_deducciones_empleado}");
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
+    }
+    
+    public ResultSet select_patronales() throws SQLException{
+        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
+    }
+    
+    public ResultSet sp_patronales() throws SQLException{
+        CallableStatement stmt = conn.prepareCall("{call sp_calcular_deducciones_patrono}");
+        boolean hasResults = stmt.execute();
+        
+        if (hasResults)
+            return stmt.getResultSet();
+        return null;
     }
     
     public void select() throws SQLException{

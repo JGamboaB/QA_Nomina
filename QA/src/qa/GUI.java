@@ -41,6 +41,8 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         Login = new javax.swing.JPanel();
         label = new javax.swing.JLabel();
@@ -55,19 +57,42 @@ public class GUI extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         b_obrero = new javax.swing.JButton();
         b_patron = new javax.swing.JButton();
-        b_renta = new javax.swing.JButton();
-        b_salario = new javax.swing.JButton();
+        b_empleados = new javax.swing.JButton();
         b_salir = new javax.swing.JButton();
         Parent = new javax.swing.JPanel();
         p_empty = new javax.swing.JPanel();
-        p_obrero = new javax.swing.JPanel();
+        p_deducciones_renta = new javax.swing.JPanel();
+        pd_title = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_deducciones_por_empleado = new javax.swing.JTable();
+        b_pd_calcular = new javax.swing.JButton();
+        pe_title2 = new javax.swing.JLabel();
+        tf_cedula = new javax.swing.JTextField();
+        b_cedula1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbl_ded_empleado = new javax.swing.JTable();
         p_patron = new javax.swing.JPanel();
-        p_p_title = new javax.swing.JLabel();
+        pp_title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_deducciones_al_patrono = new javax.swing.JTable();
         b_pp_calcular = new javax.swing.JButton();
-        p_renta = new javax.swing.JPanel();
-        p_salario = new javax.swing.JPanel();
+        p_empleado = new javax.swing.JPanel();
+        pe_title1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_empleados = new javax.swing.JTable();
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 500));
@@ -134,7 +159,7 @@ public class GUI extends javax.swing.JFrame {
         title.setBounds(0, 10, 200, 80);
 
         b_obrero.setBackground(new java.awt.Color(41, 46, 52));
-        b_obrero.setText("<html><center>Deducciones Obrero</center></html>");
+        b_obrero.setText("<html><center>Deducciones e Impuestos de Empleado</center></html>");
         b_obrero.setBorderPainted(false);
         b_obrero.setMaximumSize(new java.awt.Dimension(100, 40));
         b_obrero.setMinimumSize(new java.awt.Dimension(100, 40));
@@ -161,33 +186,19 @@ public class GUI extends javax.swing.JFrame {
         NavBar.add(b_patron);
         b_patron.setBounds(10, 160, 180, 50);
 
-        b_renta.setBackground(new java.awt.Color(41, 46, 52));
-        b_renta.setText("Impuesto de Renta");
-        b_renta.setBorderPainted(false);
-        b_renta.setMaximumSize(new java.awt.Dimension(100, 40));
-        b_renta.setMinimumSize(new java.awt.Dimension(100, 40));
-        b_renta.setPreferredSize(new java.awt.Dimension(100, 40));
-        b_renta.addActionListener(new java.awt.event.ActionListener() {
+        b_empleados.setBackground(new java.awt.Color(41, 46, 52));
+        b_empleados.setText("<html><center>Empleados</center></html>");
+        b_empleados.setBorderPainted(false);
+        b_empleados.setMaximumSize(new java.awt.Dimension(100, 40));
+        b_empleados.setMinimumSize(new java.awt.Dimension(100, 40));
+        b_empleados.setPreferredSize(new java.awt.Dimension(100, 40));
+        b_empleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_rentaActionPerformed(evt);
+                b_empleadosActionPerformed(evt);
             }
         });
-        NavBar.add(b_renta);
-        b_renta.setBounds(10, 220, 180, 50);
-
-        b_salario.setBackground(new java.awt.Color(41, 46, 52));
-        b_salario.setText("<html><center>Salario después de deducciones</center></html>");
-        b_salario.setBorderPainted(false);
-        b_salario.setMaximumSize(new java.awt.Dimension(100, 40));
-        b_salario.setMinimumSize(new java.awt.Dimension(100, 40));
-        b_salario.setPreferredSize(new java.awt.Dimension(100, 40));
-        b_salario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_salarioActionPerformed(evt);
-            }
-        });
-        NavBar.add(b_salario);
-        b_salario.setBounds(10, 280, 180, 50);
+        NavBar.add(b_empleados);
+        b_empleados.setBounds(10, 220, 180, 50);
 
         b_salir.setBackground(new java.awt.Color(41, 46, 52));
         b_salir.setText("Salir");
@@ -201,7 +212,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         NavBar.add(b_salir);
-        b_salir.setBounds(10, 340, 180, 50);
+        b_salir.setBounds(10, 280, 180, 50);
 
         Inside.add(NavBar);
         NavBar.setBounds(0, 0, 200, 500);
@@ -222,29 +233,104 @@ public class GUI extends javax.swing.JFrame {
 
         Parent.add(p_empty, "card6");
 
-        p_obrero.setBackground(new java.awt.Color(0, 0, 204));
+        p_deducciones_renta.setBackground(new java.awt.Color(204, 204, 204));
+        p_deducciones_renta.setLayout(null);
 
-        javax.swing.GroupLayout p_obreroLayout = new javax.swing.GroupLayout(p_obrero);
-        p_obrero.setLayout(p_obreroLayout);
-        p_obreroLayout.setHorizontalGroup(
-            p_obreroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        p_obreroLayout.setVerticalGroup(
-            p_obreroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        pd_title.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pd_title.setForeground(new java.awt.Color(0, 0, 0));
+        pd_title.setText("Deducciones de Obrero e Impuestos de Renta");
+        p_deducciones_renta.add(pd_title);
+        pd_title.setBounds(160, 30, 380, 25);
 
-        Parent.add(p_obrero, "card2");
+        tbl_deducciones_por_empleado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Fecha", "Cédula", "Salario Bruto", "Deducciones Obrero", "Impuesto de Renta", "Salario Neto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbl_deducciones_por_empleado);
+
+        p_deducciones_renta.add(jScrollPane2);
+        jScrollPane2.setBounds(30, 70, 630, 220);
+
+        b_pd_calcular.setText("Calcular");
+        b_pd_calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_pd_calcularActionPerformed(evt);
+            }
+        });
+        p_deducciones_renta.add(b_pd_calcular);
+        b_pd_calcular.setBounds(584, 40, 75, 23);
+
+        pe_title2.setForeground(new java.awt.Color(0, 0, 0));
+        pe_title2.setText("Buscar Empleado por Cédula:");
+        p_deducciones_renta.add(pe_title2);
+        pe_title2.setBounds(30, 310, 180, 16);
+
+        tf_cedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_cedulaActionPerformed(evt);
+            }
+        });
+        p_deducciones_renta.add(tf_cedula);
+        tf_cedula.setBounds(210, 310, 140, 22);
+
+        b_cedula1.setText("Buscar");
+        b_cedula1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_cedula1ActionPerformed(evt);
+            }
+        });
+        p_deducciones_renta.add(b_cedula1);
+        b_cedula1.setBounds(585, 310, 75, 23);
+
+        tbl_ded_empleado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Fecha", "Cédula", "Salario Bruto", "Deducciones Obreras", "Impuesto de Renta", "Salario Neto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tbl_ded_empleado);
+
+        p_deducciones_renta.add(jScrollPane6);
+        jScrollPane6.setBounds(30, 340, 630, 110);
+
+        Parent.add(p_deducciones_renta, "card2");
 
         p_patron.setBackground(new java.awt.Color(204, 204, 204));
         p_patron.setLayout(null);
 
-        p_p_title.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        p_p_title.setForeground(new java.awt.Color(0, 0, 0));
-        p_p_title.setText("Deducciones Patronales");
-        p_patron.add(p_p_title);
-        p_p_title.setBounds(250, 30, 188, 25);
+        pp_title.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pp_title.setForeground(new java.awt.Color(0, 0, 0));
+        pp_title.setText("Deducciones Patronales");
+        p_patron.add(pp_title);
+        pp_title.setBounds(250, 30, 188, 25);
 
         tbl_deducciones_al_patrono.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -268,7 +354,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl_deducciones_al_patrono);
 
         p_patron.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 70, 634, 350);
+        jScrollPane1.setBounds(30, 70, 630, 350);
 
         b_pp_calcular.setText("Calcular");
         b_pp_calcular.addActionListener(new java.awt.event.ActionListener() {
@@ -281,35 +367,40 @@ public class GUI extends javax.swing.JFrame {
 
         Parent.add(p_patron, "card3");
 
-        p_renta.setBackground(new java.awt.Color(255, 0, 0));
+        p_empleado.setBackground(new java.awt.Color(204, 204, 204));
+        p_empleado.setLayout(null);
 
-        javax.swing.GroupLayout p_rentaLayout = new javax.swing.GroupLayout(p_renta);
-        p_renta.setLayout(p_rentaLayout);
-        p_rentaLayout.setHorizontalGroup(
-            p_rentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        p_rentaLayout.setVerticalGroup(
-            p_rentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        pe_title1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pe_title1.setForeground(new java.awt.Color(0, 0, 0));
+        pe_title1.setText("Empleados");
+        p_empleado.add(pe_title1);
+        pe_title1.setBounds(300, 30, 100, 25);
 
-        Parent.add(p_renta, "card4");
+        tbl_empleados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cédula", "Nombre Completo", "Salario Bruto", "Cumpleaños", "Departamento", "Aporte Asociación"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        p_salario.setBackground(new java.awt.Color(0, 255, 102));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tbl_empleados);
 
-        javax.swing.GroupLayout p_salarioLayout = new javax.swing.GroupLayout(p_salario);
-        p_salario.setLayout(p_salarioLayout);
-        p_salarioLayout.setHorizontalGroup(
-            p_salarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        p_salarioLayout.setVerticalGroup(
-            p_salarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        p_empleado.add(jScrollPane5);
+        jScrollPane5.setBounds(30, 70, 630, 350);
 
-        Parent.add(p_salario, "card5");
+        Parent.add(p_empleado, "card5");
 
         Inside.add(Parent);
         Parent.setBounds(200, 0, 700, 500);
@@ -324,6 +415,22 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void update_tbl_deducciones_al_patrono(ResultSet rs) throws SQLException{
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_al_patrono.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            int entry = rs.getInt("codigo");
+            String current_date = rs.getString("curdate");
+            int monto_a_pagar = rs.getInt("monto_a_pagar");
+            int monto_total_bruto = rs.getInt("monto_total_bruto");
+            //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
+            Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
+
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
     
     private void b_patronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_patronActionPerformed
         Parent.removeAll();
@@ -331,52 +438,79 @@ public class GUI extends javax.swing.JFrame {
         Parent.repaint();
         Parent.revalidate();
         try {
-            ResultSet rs = server.ver_d_patronales();
-            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_al_patrono.getModel();
-            model.setRowCount(0);
-            
-            while (rs.next()) {
-                int entry = rs.getInt("codigo");
-                String current_date = rs.getString("curdate");
-                int monto_a_pagar = rs.getInt("monto_a_pagar");
-                int monto_total_bruto = rs.getInt("monto_total_bruto");
-                //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
-                Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
-              
-                model.addRow(row);
-            }
-            model.fireTableDataChanged();
-
+            ResultSet rs = server.select_patronales();
+            update_tbl_deducciones_al_patrono(rs);
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }//GEN-LAST:event_b_patronActionPerformed
 
+    private void update_tbl_deducciones_por_empleado(ResultSet rs) throws SQLException{
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_por_empleado.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            String fecha = rs.getString("Fecha");
+            int cedula = rs.getInt("Cedula");
+            int salario_bruto = rs.getInt("Salario Bruto");
+            int deducciones = rs.getInt("Deducciones Obreras");
+            int impuesto = rs.getInt("Impuesto de Renta");
+            int salario_neto = rs.getInt("Salario Neto");
+            //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
+            Object[] row = {fecha, cedula, numberFormat.format(salario_bruto), numberFormat.format(deducciones), numberFormat.format(impuesto), numberFormat.format(salario_neto)};
+
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
+    
     private void b_obreroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_obreroActionPerformed
         Parent.removeAll();
-        Parent.add(p_obrero);
+        Parent.add(p_deducciones_renta);
         Parent.repaint();
         Parent.revalidate();
         try {
-            server.select();
+            ResultSet rs = server.select_empleado();
+            update_tbl_deducciones_por_empleado(rs);
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_b_obreroActionPerformed
 
-    private void b_rentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_rentaActionPerformed
-        Parent.removeAll();
-        Parent.add(p_renta);
-        Parent.repaint();
-        Parent.revalidate();
-    }//GEN-LAST:event_b_rentaActionPerformed
+        private void update_tbl_empleados(ResultSet rs) throws SQLException{
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_empleados.getModel();
+        model.setRowCount(0);
 
-    private void b_salarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salarioActionPerformed
+        while (rs.next()) {
+            int cedula = rs.getInt("Cedula");
+            String nombre = rs.getString("nombre");
+            String apellido1 = rs.getString("apellido1");
+            String apellido2 = rs.getString("apellido2");
+            int salario_bruto = rs.getInt("salario");
+            String birthday = rs.getString("fecha_nacimiento");
+            String departamento = rs.getString("departamento");
+            float aporteAso = rs.getFloat("aporte_asociacion");
+
+            //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
+            Object[] row = {cedula, nombre+" "+apellido1+" "+apellido2,numberFormat.format(salario_bruto), birthday, departamento, aporteAso};
+
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
+    
+    private void b_empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_empleadosActionPerformed
         Parent.removeAll();
-        Parent.add(p_salario);
+        Parent.add(p_empleado);
         Parent.repaint();
         Parent.revalidate();
-    }//GEN-LAST:event_b_salarioActionPerformed
+        try {
+            ResultSet rs = server.select_empleados();
+            update_tbl_empleados(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_b_empleadosActionPerformed
 
     private void b_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salirActionPerformed
         Parent.removeAll();
@@ -415,26 +549,60 @@ public class GUI extends javax.swing.JFrame {
 
     private void b_pp_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_pp_calcularActionPerformed
         try {
-            ResultSet rs = server.calc_d_patronales();
-            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_deducciones_al_patrono.getModel();
-            model.setRowCount(0);
-            
-            while (rs.next()) {
-                int entry = rs.getInt("codigo");
-                String current_date = rs.getString("curdate");
-                int monto_a_pagar = rs.getInt("monto_a_pagar");
-                int monto_total_bruto = rs.getInt("monto_total_bruto");
-                //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
-                Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
-              
-                model.addRow(row);
-            }
-            model.fireTableDataChanged();
-
+            server.sp_patronales();
+            ResultSet rs = server.select_patronales();
+            update_tbl_deducciones_al_patrono(rs);
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }//GEN-LAST:event_b_pp_calcularActionPerformed
+
+    private void b_pd_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_pd_calcularActionPerformed
+        try {
+            server.sp_empleado();
+            ResultSet rs = server.select_empleado();
+            update_tbl_deducciones_por_empleado(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_b_pd_calcularActionPerformed
+
+    private void tf_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_cedulaActionPerformed
+
+    private void update_tbl_ded_empleado(ResultSet rs) throws SQLException{
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tbl_ded_empleado.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            String fecha = rs.getString("Fecha");
+            int cedula = rs.getInt("Cedula");
+            int salario_bruto = rs.getInt("Salario Bruto");
+            int deducciones = rs.getInt("Deducciones Obreras");
+            int impuesto = rs.getInt("Impuesto de Renta");
+            int salario_neto = rs.getInt("Salario Neto");
+            Object[] row = {fecha, cedula, numberFormat.format(salario_bruto), numberFormat.format(deducciones), numberFormat.format(impuesto), numberFormat.format(salario_neto)};
+            
+            model.addRow(row);
+        }
+        model.fireTableDataChanged();
+    }
+    
+    private void b_cedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cedula1ActionPerformed
+        String cedula = tf_cedula.getText();
+        
+        if (cedula.equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese una cédula.");
+        } else { 
+            try {
+                ResultSet rs = server.select_ded_empleado(cedula);
+                update_tbl_ded_empleado(rs);
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_b_cedula1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -483,27 +651,39 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel Login;
     private javax.swing.JPanel NavBar;
     private javax.swing.JPanel Parent;
+    private javax.swing.JButton b_cedula1;
+    private javax.swing.JButton b_empleados;
     private javax.swing.JButton b_login;
     private javax.swing.JButton b_obrero;
     private javax.swing.JButton b_patron;
+    private javax.swing.JButton b_pd_calcular;
     private javax.swing.JButton b_pp_calcular;
-    private javax.swing.JButton b_renta;
-    private javax.swing.JButton b_salario;
     private javax.swing.JButton b_salir;
     private javax.swing.JCheckBox cb_showp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel l_password;
     private javax.swing.JLabel l_username;
     private javax.swing.JLabel label;
+    private javax.swing.JPanel p_deducciones_renta;
+    private javax.swing.JPanel p_empleado;
     private javax.swing.JPanel p_empty;
-    private javax.swing.JPanel p_obrero;
-    private javax.swing.JLabel p_p_title;
     private javax.swing.JPanel p_patron;
-    private javax.swing.JPanel p_renta;
-    private javax.swing.JPanel p_salario;
+    private javax.swing.JLabel pd_title;
+    private javax.swing.JLabel pe_title1;
+    private javax.swing.JLabel pe_title2;
+    private javax.swing.JLabel pp_title;
     private javax.swing.JPasswordField pwfield;
+    private javax.swing.JTable tbl_ded_empleado;
     private javax.swing.JTable tbl_deducciones_al_patrono;
+    private javax.swing.JTable tbl_deducciones_por_empleado;
+    private javax.swing.JTable tbl_empleados;
+    private javax.swing.JTextField tf_cedula;
     private javax.swing.JTextField tf_username;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
