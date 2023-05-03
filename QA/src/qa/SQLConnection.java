@@ -20,8 +20,8 @@ public class SQLConnection{
         String sql = """
                      SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
                      FROM [tbl_deducciones_por_empleado] deduc
-                     JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula
-                     WHERE deduc.empleado_id = """ + i;
+                     JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula 
+                     WHERE deduc.empleado_id = """ + i + "ORDER BY deduc.curdate DESC;";
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -47,7 +47,7 @@ public class SQLConnection{
         String sql = """
         SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
         FROM [tbl_deducciones_por_empleado] deduc
-        JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula""";
+        JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula ORDER BY deduc.curdate DESC;""";
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
