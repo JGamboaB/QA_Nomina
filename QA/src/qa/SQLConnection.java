@@ -17,11 +17,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_ded_empleado(String i) throws SQLException{
-        String sql = """
-                     SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
-                     FROM [tbl_deducciones_por_empleado] deduc
-                     JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula 
-                     WHERE deduc.empleado_id = """ + i + "ORDER BY deduc.curdate DESC;";
+        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula WHERE deduc.empleado_id = " + i + "ORDER BY deduc.curdate DESC;";
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -31,10 +27,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_empleados() throws SQLException{
-        String sql = """
-        select emp.cedula, emp.nombre, emp.apellido1, emp.apellido2, emp.salario, emp.fecha_nacimiento, d.descripcion as departamento, emp.aporte_asociacion
-        from [tbl_empleados] emp
-        JOIN [tbl_departamento] d ON emp.departamento_id = d.codigo""";
+        String sql = "select emp.cedula, emp.nombre, emp.apellido1, emp.apellido2, emp.salario, emp.fecha_nacimiento, d.descripcion as departamento, emp.aporte_asociacion from [tbl_empleados] emp JOIN [tbl_departamento] d ON emp.departamento_id = d.codigo";
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -43,11 +36,8 @@ public class SQLConnection{
         return null;
     }
     
-    public ResultSet select_empleado() throws SQLException{
-        String sql = """
-        SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' 
-        FROM [tbl_deducciones_por_empleado] deduc
-        JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula ORDER BY deduc.curdate DESC;""";
+    public ResultSet select_ded_empleados() throws SQLException{
+        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula ORDER BY deduc.curdate DESC;"; //Agregar IVM, SEM y Banco Popular en ese orden antes de las Deducciones Obreras
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -66,7 +56,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_patronales() throws SQLException{
-        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;";
+        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;"; //Incluir los cambios necesarios
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -86,10 +76,7 @@ public class SQLConnection{
     
     public void select() throws SQLException{
         // Select Statement Example
-        String sql = """
-                     select e.nombre, td.descripcion from tbl_empleados as e
-                         JOIN tbl_departamento td on td.codigo = e.departamento_id
-                         where e.departamento_id = 1;""";
+        String sql = "select e.nombre, td.descripcion from tbl_empleados as e JOIN tbl_departamento td on td.codigo = e.departamento_id where e.departamento_id = 1;";
         System.out.println(sql);
         try (Statement statement = conn.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
