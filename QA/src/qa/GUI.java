@@ -331,17 +331,17 @@ public class GUI extends javax.swing.JFrame {
 
         tbl_ded_empleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Fecha", "Cédula", "Salario Bruto", "Deducciones Obreras", "Impuesto de Renta", "Salario Neto"
+                "Fecha", "Cédula", "Salario Bruto", "IVM", "SEM", "Banco Popular", "Deducciones Obreras", "Impuesto de Renta", "Salario Neto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
