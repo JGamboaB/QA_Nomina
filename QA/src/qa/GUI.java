@@ -171,7 +171,6 @@ public class GUI extends javax.swing.JFrame {
 
         b_empleados.setBackground(new java.awt.Color(41, 46, 52));
         b_empleados.setText("<html><center>Consultar Empleados</center></html>");
-        b_empleados.setActionCommand("<html><center>Consultar Empleados</center></html>");
         b_empleados.setBorderPainted(false);
         b_empleados.setMaximumSize(new java.awt.Dimension(100, 40));
         b_empleados.setMinimumSize(new java.awt.Dimension(100, 40));
@@ -248,7 +247,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tbl_deducciones_por_empleado);
 
         p_deducciones_renta.add(jScrollPane2);
-        jScrollPane2.setBounds(30, 210, 630, 250);
+        jScrollPane2.setBounds(40, 220, 630, 250);
 
         b_pd_calcular.setText("Calcular");
         b_pd_calcular.addActionListener(new java.awt.event.ActionListener() {
@@ -261,17 +260,17 @@ public class GUI extends javax.swing.JFrame {
 
         tbl_deducciones_al_patrono.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Fecha", "Seguro de Enfermedad y Maternidad", "Invalidez, Vejez y Muerte", "Cuota Patronal Banco Popular", "Asignaciones Familiares", "IMAS", "INA", "Aporte Patrono Banco Popular", "Fondo de Capitalización Laboral", "Fondo de Pensiones Complementarias", "INS", "Monto a pagar", "Monto total bruto"
+                "Código", "Fecha", "SEM", "IVM", "Cuota Banco Popular", "Familiares", "IMAS", "INA", "Aporte Patrono Banco Popular", "FCL", "FPC", "INS", "Monto total bruto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true, true, true, true, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -392,10 +391,19 @@ public class GUI extends javax.swing.JFrame {
         while (rs.next()) {
             int entry = rs.getInt("codigo");
             String current_date = rs.getString("curdate");
-            int monto_a_pagar = rs.getInt("monto_a_pagar");
+            int ivm = rs.getInt("IVM");
+            int sem = rs.getInt("SEM");
+            int cuotaBP = rs.getInt("Cuota Banco Popular");
+            int familiares = rs.getInt("familiares");
+            int imas = rs.getInt("IMAS");
+            int ina = rs.getInt("INA");
+            int aporteBP = rs.getInt("aporte_banco_popular");
+            int fcl = rs.getInt("FCL");
+            int fpc = rs.getInt("FPC");
+            int ins = rs.getInt("INS");
             int monto_total_bruto = rs.getInt("monto_total_bruto");
             //System.out.println("entry "+ entry + " current_date: " + current_date + " monto_a_pagar: " + monto_a_pagar + " monto_total_bruto:" +monto_total_bruto);
-            Object[] row = {entry, current_date, numberFormat.format(monto_a_pagar), numberFormat.format(monto_total_bruto)};
+            Object[] row = {entry, current_date, numberFormat.format(sem), numberFormat.format(ivm), numberFormat.format(cuotaBP), numberFormat.format(familiares), numberFormat.format(imas), numberFormat.format(ina), numberFormat.format(aporteBP), numberFormat.format(fcl), numberFormat.format(fpc), numberFormat.format(ins), numberFormat.format(monto_total_bruto)};
 
             model.addRow(row);
         }

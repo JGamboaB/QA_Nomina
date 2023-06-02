@@ -236,7 +236,6 @@
                       <Color blue="34" green="2e" red="29" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Consultar Empleados&lt;/center&gt;&lt;/html&gt;"/>
-                    <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;Consultar Empleados&lt;/center&gt;&lt;/html&gt;"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[100, 40]"/>
@@ -357,7 +356,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="30" y="210" width="630" height="250"/>
+                          <AbsoluteConstraints x="40" y="220" width="630" height="250"/>
                         </Constraint>
                       </Constraints>
 
@@ -462,30 +461,24 @@
                         <Component class="javax.swing.JTable" name="tbl_deducciones_al_patrono">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="14" rowCount="4">
+                              <Table columnCount="13" rowCount="4">
                                 <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                                 <Column editable="false" title="Fecha" type="java.lang.Object"/>
-                                <Column editable="false" title="Seguro de Enfermedad y Maternidad" type="java.lang.Object"/>
-                                <Column editable="false" title="Invalidez, Vejez y Muerte" type="java.lang.Object"/>
-                                <Column editable="false" title="Cuota Patronal Banco Popular" type="java.lang.Object"/>
-                                <Column editable="false" title="Asignaciones Familiares" type="java.lang.Object"/>
-                                <Column editable="true" title="IMAS" type="java.lang.Object"/>
-                                <Column editable="true" title="INA" type="java.lang.Object"/>
-                                <Column editable="true" title="Aporte Patrono Banco Popular" type="java.lang.Object"/>
-                                <Column editable="true" title="Fondo de Capitalizaci&#xf3;n Laboral" type="java.lang.Object"/>
-                                <Column editable="true" title="Fondo de Pensiones Complementarias" type="java.lang.Object"/>
-                                <Column editable="true" title="INS" type="java.lang.Object"/>
-                                <Column editable="false" title="Monto a pagar" type="java.lang.Object"/>
+                                <Column editable="false" title="SEM" type="java.lang.Object"/>
+                                <Column editable="false" title="IVM" type="java.lang.Object"/>
+                                <Column editable="false" title="Cuota Banco Popular" type="java.lang.Object"/>
+                                <Column editable="false" title="Familiares" type="java.lang.Object"/>
+                                <Column editable="false" title="IMAS" type="java.lang.Object"/>
+                                <Column editable="false" title="INA" type="java.lang.Object"/>
+                                <Column editable="false" title="Aporte Patrono Banco Popular" type="java.lang.Object"/>
+                                <Column editable="false" title="FCL" type="java.lang.Object"/>
+                                <Column editable="false" title="FPC" type="java.lang.Object"/>
+                                <Column editable="false" title="INS" type="java.lang.Object"/>
                                 <Column editable="false" title="Monto total bruto" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                  <Title/>
-                                  <Editor/>
-                                  <Renderer/>
-                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>

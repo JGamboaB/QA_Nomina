@@ -17,7 +17,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_ded_empleado(String i) throws SQLException{
-        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula WHERE deduc.empleado_id = " + i + "ORDER BY deduc.curdate DESC;";
+        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduc.IVM as 'IVM', deduc.SEM as 'SEM', deduc.banco_popular as 'Banco Popular', (deduc.IVM+deduc.SEM+deduc.banco_popular) as 'Deducciones Obreras', deduc.deduccion_impuesto as 'Impuesto de Renta', (emp.salario - ((deduc.IVM+deduc.SEM+deduc.banco_popular)+deduc.deduccion_impuesto)) as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula WHERE deduc.empleado_id = " + i + "ORDER BY deduc.curdate DESC;";
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
@@ -37,7 +37,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_ded_empleados() throws SQLException{
-        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduccion_cargas_sociales as 'Deducciones Obreras', deduccion_impuesto as 'Impuesto de Renta', salario_neto as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula ORDER BY deduc.curdate DESC;"; //Agregar IVM, SEM y Banco Popular en ese orden antes de las Deducciones Obreras
+        String sql = "SELECT deduc.curdate as 'Fecha', deduc.empleado_id as Cedula, emp.salario as 'Salario Bruto', deduc.IVM as 'IVM', deduc.SEM as 'SEM', deduc.banco_popular as 'Banco Popular', (deduc.IVM+deduc.SEM+deduc.banco_popular) as 'Deducciones Obreras', deduc.deduccion_impuesto as 'Impuesto de Renta', (emp.salario - ((deduc.IVM+deduc.SEM+deduc.banco_popular)+deduc.deduccion_impuesto)) as 'Salario Neto' FROM [tbl_deducciones_por_empleado] deduc JOIN [tbl_empleados] emp ON deduc.empleado_id = emp.cedula ORDER BY deduc.curdate DESC;"; //Agregar IVM, SEM y Banco Popular en ese orden antes de las Deducciones Obreras
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
