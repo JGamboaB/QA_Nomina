@@ -356,7 +356,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="40" y="220" width="630" height="250"/>
+                          <AbsoluteConstraints x="40" y="220" width="630" height="230"/>
                         </Constraint>
                       </Constraints>
 
@@ -376,6 +376,9 @@
                                 <Column editable="false" title="Impuesto de Renta" type="java.lang.Object"/>
                                 <Column editable="false" title="Salario Neto" type="java.lang.Object"/>
                               </Table>
+                            </Property>
+                            <Property name="autoResizeMode" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="0" type="code"/>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
@@ -476,6 +479,9 @@
                                 <Column editable="false" title="INS" type="java.lang.Object"/>
                                 <Column editable="false" title="Monto total bruto" type="java.lang.Object"/>
                               </Table>
+                            </Property>
+                            <Property name="autoResizeMode" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="0" type="code"/>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
@@ -707,6 +713,9 @@
                                 <Column editable="false" title="Impuesto de Renta" type="java.lang.Object"/>
                                 <Column editable="false" title="Salario Neto" type="java.lang.Object"/>
                               </Table>
+                            </Property>
+                            <Property name="autoResizeMode" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="0" type="code"/>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">

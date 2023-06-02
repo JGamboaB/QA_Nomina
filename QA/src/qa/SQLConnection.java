@@ -56,7 +56,7 @@ public class SQLConnection{
     }
     
     public ResultSet select_patronales() throws SQLException{
-        String sql = "SELECT * FROM  tbl_deducciones_al_patrono ORDER BY codigo DESC;"; //Incluir los cambios necesarios
+        String sql = "SELECT codigo, curdate, SEM, IVM, cuota_banco_popular, familiares, IMAS, INA, aporte_banco_popular, FCL, FPC, INS, monto_total_bruto FROM tbl_deducciones_al_patrono ORDER BY codigo DESC";//Incluir los cambios necesarios
         PreparedStatement stmt = conn.prepareStatement(sql);
         boolean hasResults = stmt.execute();
         
